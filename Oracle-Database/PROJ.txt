@@ -1,0 +1,67 @@
+create table proj(
+	pid int,
+	pname varchar(30),
+	Startdate date,
+	Enddate date,
+	primary key(pid)
+	);
+	
+	
+create table Agent(
+	aid int,
+	a_name varchar(30),
+	a_phone int,
+	primary key(aid)
+	);
+
+create table Buyer(
+	bid int,
+	aid int,
+	b_name varchar(30),
+	primary key (bid),
+	foreign key (aid) references Agent (aid)
+	);
+	
+create table Seller(
+	sid int,
+	aid int,
+	s_name varchar(30),
+	primary key (sid),
+	foreign key (aid) references Agent (aid)
+	);
+	
+create table House(
+	hid int,
+	h_street varchar(50),
+	h_state varchar(30),
+	h_zip int,
+	h_listingDate date,
+	h_price float,
+	h_squareFootage float,
+	h_year date,
+	primary key (hid)
+	);
+	
+create table Appointment(
+	Appid int,
+	bid int,
+	hid int,
+	foreign key (bid) references Buyer (bid),
+	foreign key (hid) references House (hid),
+	primary key (Appid),
+	time date
+	);
+	
+create table Watch_list(
+	bid int,
+	hid int,
+	foreign key (bid) references Buyer (bid),
+	foreign key (hid) references House (hid)
+	);
+	
+create table Selling_list(
+	sid int,
+	hid int,
+	foreign key (sid) references Seller (sid),
+	foreign key (hid) references House (hid)
+	);
